@@ -1,8 +1,8 @@
 import librosa.display
 import matplotlib.pyplot as plt
 
-x, sr = librosa.load('wav/test/ex/clnsp695.wav', sr=16000)
-y, _ = librosa.load('wav/test/ex/clnsp695_s.wav', sr=16000)
+x, sr = librosa.load('wav/test/ex/clnsp654.wav', sr=16000)
+y, _ = librosa.load('wav/test/ex/clnsp654_s.wav', sr=16000)
 plt.figure(figsize=(18, 5))
 plt.subplot(1, 2, 1)
 librosa.display.waveplot(x, sr)
