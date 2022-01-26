@@ -3,7 +3,7 @@ import json
 import numpy as np
 import soundfile as sf
 from models.ComplexVQ2 import ComplexVQ2
-from models.InvGammatoneFB import InvConvGamma
+from models.InvGammatone_Origin import InvConvGamma
 import torch
 import librosa
 import matplotlib.pyplot as plt
@@ -35,8 +35,8 @@ def plot_loss(torchpt):
 
 # plot_loss('Trained/SEModel_VQ2_80.pt')
 device = "cuda" if torch.cuda.is_available() else "cpu"
-temp = torch.load('Trained/SEModel_VQ2_80.pt')
-fname = 'clnsp695'
+temp = torch.load('Trained/SEModel_VQ2_180.pt')
+fname = 'clnsp16'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--config', type=str, required=True,
@@ -61,7 +61,7 @@ phase = torch.atan2(s_mix_i, s_mix_r)
 var_speech = torch.exp(log_var_speech)
 
 mag_mix = torch.sqrt(var_speech)
-xout = invmodel(mag_mix*phase)
+xout = invmodel(mag_mix*torch.cos(phase))
 
 xout = np.squeeze(xout.detach().cpu().numpy())
 
