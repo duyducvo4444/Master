@@ -62,10 +62,13 @@ def train(model_name, batch_size=None, learning_rate=1e-3, clean_dir_train='', n
 
             perplex_top = loss_components["plx_top"]
             perplex_bot = loss_components["plx_bot"]
+            if checkNan(loss.item()):
+                torch.save(loss_components, 'Trained/NaN_' + str(i) + '.pt')
+                raise ValueError('NaN in step' + str(batch))
             train_loss.append(loss.item())
             perp_t.append(perplex_top.item())
             perp_b.append(perplex_bot.item())
-            if batch > -1:          # edit based on $batch_size
+            if batch > 3:  # edit based on $batch_size
                 break
 
         tr_loss.append(np.mean(train_loss))
@@ -87,6 +90,10 @@ def train(model_name, batch_size=None, learning_rate=1e-3, clean_dir_train='', n
     print('Training done!')
 
     return 0
+
+
+def checkNan(num):
+    return num != num
 
 
 class Validation(object):

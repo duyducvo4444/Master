@@ -9,7 +9,7 @@
     "sample_rate": 16000,
     "data_duration": 0.5,
     "checkpoint": "",
-    "pretrain_pt": "Trained/SEModel_VQ2_180.pt"
+    "pretrain_pt": "Trained/SEModel_VQ2_80.pt"
   },
   "validation_configs": {
     "clean_dir": "D:/Master/JAIST/Proposal/Datasets/MS-SNSD/clean_test/*.wav",

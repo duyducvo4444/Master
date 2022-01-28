@@ -431,7 +431,7 @@ class ComplexVQ2(nn.Module):
         s_noise_abs_2 = s_noise_abs_2[..., :-self.look_ahead_frames]
         s_clean_abs_2 = s_clean_abs_2[..., :-self.look_ahead_frames]
         rc_loss_clean = (log_var_speech - torch.log(s_clean_abs_2 + 1e-12) +
-                         s_clean_abs_2 * torch.exp(-log_var_speech)).mean() - 1
+                         s_clean_abs_2 * torch.exp(-log_var_speech)).mean()
 
         log_var_noise = self.noise_vae(torch.log(s_mix_abs_2 + 1e-12) - log_var_speech.detach(),
                                        log_var_speech.detach())
@@ -439,7 +439,7 @@ class ComplexVQ2(nn.Module):
         log_var_speech = log_var_speech[..., :log_var_noise.shape[-1]]
 
         rc_loss_noise = (log_var_noise - torch.log(s_noise_abs_2[..., :log_var_noise.shape[-1]] + 1e-12)
-                         + s_noise_abs_2[..., :log_var_noise.shape[-1]] * torch.exp(-log_var_noise)).mean() - 1
+                         + s_noise_abs_2[..., :log_var_noise.shape[-1]] * torch.exp(-log_var_noise)).mean()
 
         tf_gain = torch.exp(log_var_speech) / (torch.exp(log_var_speech) + torch.exp(log_var_noise))
         with torch.no_grad():
@@ -503,7 +503,7 @@ class ComplexVQ2(nn.Module):
         x_abs_2 = x_abs_2[:, :, :-self.look_ahead_frames]
         log_var = log_var[:, :, self.look_ahead_frames:]
         log_x_abs_2 = torch.log(x_abs_2 + 1e-12)
-        loss = log_var - log_x_abs_2 + x_abs_2 * torch.exp(-log_var) - 1
+        loss = log_var - log_x_abs_2 + x_abs_2 * torch.exp(-log_var)
         return loss
 
     @staticmethod
