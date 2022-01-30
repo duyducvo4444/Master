@@ -99,7 +99,7 @@
       "hidden_dim": 64
     },
     "gamma_configs": {
-      "NumCh": 32,
+      "NumCh": 64,
       "fs": 16000,
       "f0": 600
     }
