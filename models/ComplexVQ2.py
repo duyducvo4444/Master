@@ -583,7 +583,7 @@ class ComplexVQ2(nn.Module):
                                                        s_mix_i[..., :mask.shape[-1]].detach(),
                                                        tf_gain[..., :mask.shape[-1]])
 
-                x_hat = self.istft(s_enhance_phase).squeeze(dim=1)
+                x_hat = self.invgamma(s_enhance_phase).squeeze(dim=1)
                 s_enhance_abs_2 = tf_gain * s_mix_abs_2[..., :tf_gain.shape[-1]]
                 return x_hat, s_enhance_abs_2, log_var_speech, log_var_noise
 

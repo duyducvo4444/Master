@@ -33,10 +33,10 @@ def plot_loss(torchpt):
     plt.show()
 
 
-# plot_loss('Trained/SEModel_VQ2_180.pt')
+# plot_loss('Trained/SEModel_VQ2_180_64C.pt')
 device = "cuda" if torch.cuda.is_available() else "cpu"
-temp = torch.load('Trained/SEModel_VQ2_80.pt')
-fname = 'clnsp654'
+temp = torch.load('Trained/SEModel_VQ2_90_64C.pt')
+fname = 'clnsp16'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--config', type=str, required=True,
@@ -54,7 +54,7 @@ x = torch.unsqueeze(x, 0).to(device)
 
 ana = ComplexVQ2(**model_config).to(device)
 ana.copy_state_dict(temp['state_dict'])
-invmodel = InvConvGamma(NumCh=32, f0=600, fs=16000).to(device)
+invmodel = InvConvGamma(NumCh=64, f0=600, fs=16000).to(device)
 
 log_var_speech, s_mix_r, s_mix_i = ana.inference(x)
 phase = torch.atan2(s_mix_i, s_mix_r)

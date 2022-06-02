@@ -2,8 +2,8 @@ import pysepm
 from pystoi import stoi
 from Utils import loadAudioToEval, SNR_dB
 
-cleanPath = 'temp2.wav'
-noisyPath = 'temp.wav'
+cleanPath = 'wav/test/ex/clnsp16.wav'
+noisyPath = 'wav/test/ex/clnsp16_s.wav'
 ref, deg, fs = loadAudioToEval(cleanPath, noisyPath, sr=16000)
 
 print('PESQ: ' + str(pysepm.pesq(ref, deg, fs)))
